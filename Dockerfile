@@ -7,8 +7,9 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     apk add  \
     bash \
     curl \
+    htop \
+    vim \
     runit && \
-    htop && \
     rm -rf /var/cache/apk/* && \
     adduser -h /home/user-service -s /bin/sh -D user-service -u 2000 && \
     chown user-service:user-service /home/user-service && \
