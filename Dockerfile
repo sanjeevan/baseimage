@@ -1,5 +1,5 @@
 FROM alpine:latest
-
+ENV TERM=xterm-256color
 COPY ./boot.sh /sbin/boot.sh
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories  && \
@@ -8,6 +8,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
     bash \
     curl \
     runit && \
+    htop && \
     rm -rf /var/cache/apk/* && \
     adduser -h /home/user-service -s /bin/sh -D user-service -u 2000 && \
     chown user-service:user-service /home/user-service && \
