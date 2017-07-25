@@ -1,8 +1,8 @@
-FROM alpine:3.5
+FROM alpine:3.6
 ENV TERM=xterm-256color
 COPY ./boot.sh /sbin/boot.sh
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.5/community" >> /etc/apk/repositories  && \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.6/community" >> /etc/apk/repositories  && \
     apk --update upgrade && \
     apk add  \
     bash \
