@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 shutdown() {
   echo "shutting down container"

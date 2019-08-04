@@ -1,21 +1,21 @@
-FROM alpine:3.7
-MAINTAINER Sanjeevan Ambalavanar <sanjeevan@pureparadox.com>
-ENV TERM=xterm-256color
+FROM debian:10-slim
+LABEL maintainer="Sanjeevan Ambalavanar <sanjeevan@pureparadox.com>"
 COPY ./boot.sh /sbin/boot.sh
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v3.7/community" >> /etc/apk/repositories  && \
-    apk --update upgrade && \
-    apk add  \
+RUN DEBIAN_FRONTEND=noninteractive; \  
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
     bash \
     curl \
     htop \
     vim \
     runit && \
-    rm -rf /var/cache/apk/* && \
-    adduser -h /home/user-service -s /bin/sh -D user-service -u 2000 && \
+    useradd -d /home/user-service -s /bin/sh -u 2000 user-service && \
+    mkdir /home/user-service && \
     chown user-service:user-service /home/user-service && \
     chmod +x /sbin/boot.sh && \
-    mkdir /etc/run_once
+    mkdir /etc/run_once && \
+    apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # sample service
 #COPY ./example.init /etc/service/example/run
