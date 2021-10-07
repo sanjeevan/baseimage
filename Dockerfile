@@ -1,14 +1,17 @@
-FROM debian:10-slim
+FROM debian:11-slim
 LABEL maintainer="Sanjeevan Ambalavanar <sanjeevan@pureparadox.com>"
 COPY ./boot.sh /sbin/boot.sh
 
 RUN DEBIAN_FRONTEND=noninteractive; \  
     apt-get update && \
     apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
     bash \
     curl \
     htop \
     vim \
+    procps \
     runit && \
     useradd -d /home/user-service -s /bin/sh -u 2000 user-service && \
     mkdir /home/user-service && \
